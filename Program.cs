@@ -61,6 +61,7 @@ partial class Program
             Config.DEBUG_LOG = myOption.DebugLog;
             var inputUrl = myOption.Url;
             var skipChangeName = !myOption.SkipChangeFilename;
+            var skipFileNameFiltering = myOption.SkipFileNameFiltering;
             LogDebug("程序路径: {0}", Path.GetDirectoryName(Environment.ProcessPath)!);
             LogDebug("运行参数：{0}", JsonSerializer.Serialize(myOption, MyOptionJsonContext.Default.MyOption));
             if (File.Exists(inputUrl))
@@ -76,11 +77,17 @@ partial class Program
                 var finalFiles = new List<string>();
                 files.AddRange(Directory.GetFiles(inputUrl));
                 LogDebug($"文件夹有 {files.Count} 个文件：");
-                var removeList = new List<int>();
-                foreach (var f in files)
+                if (skipFileNameFiltering)
                 {
-                    LogDebug($"{Path.GetFileName(f)}");
-                    if (IsNumber(Path.GetFileNameWithoutExtension(f))) finalFiles.Add(f);;
+                    finalFiles.AddRange(files);
+                }
+                else
+                {
+                    foreach (var f in files)
+                    {
+                        LogDebug($"{Path.GetFileName(f)}");
+                        if (IsNumber(Path.GetFileNameWithoutExtension(f))) finalFiles.Add(f);;
+                    }
                 }
                 files.Clear();
                 LogDebug($"待处理 {finalFiles.Count} 个文件：");
