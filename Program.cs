@@ -192,7 +192,7 @@ partial class Program
         try
         {
             LogColor($"将文件 {Path.GetFileName(url)} 重命名为 {title}-{artist}{Path.GetExtension(url)}");
-            File.Move(url, $"{Path.GetDirectoryName(url)!}\\{title}.{Path.GetExtension(url)}", true);
+            File.Move(url, $"{Path.GetDirectoryName(url)!}\\{title}{Path.GetExtension(url)}", true);
         }
         catch (Exception e)
         {
