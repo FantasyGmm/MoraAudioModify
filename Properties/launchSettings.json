@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MoraAudioModify": {
+      "commandName": "Project",
+      "commandLineArgs": "-scf -sff -debug G:\\0022088529.flac"
+    }
+  }
+}

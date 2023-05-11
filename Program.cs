@@ -140,15 +140,15 @@ partial class Program
             LogDebug($"{fileName}-Channels arrangement : {theTrack.ChannelsArrangement.Description}");
             LogDebug($"{fileName}-Has variable bitrate audio : {(theTrack.IsVBR ? "yes" : "no")}");
             LogDebug($"{fileName}-Has lossless audio : {(AudioDataIOFactory.CF_LOSSLESS == theTrack.CodecFamily ? "yes" : "no")}");
-        
+
             foreach (KeyValuePair<string, string> field in theTrack.AdditionalFields)
             {
                 LogDebug($"{fileName}-Custom field {field.Key} : value = {field.Value}");
             }
         }
-        
+
         LogColor($"{fileName}-正在删除Tag");
-        
+
         theTrack.Comment = "";
 
         foreach (var s in DelTagList)
@@ -164,12 +164,12 @@ partial class Program
                 LogDebug($"{fileName}-Custom field {field.Key} : value = {field.Value}");
             }
         }
-        
+
         var tilte = theTrack.Title;
         var artist = theTrack.Artist;
-        
+
         LogColor($"{fileName}-正在保存修改");
-        
+
         if (isBatch)
         {
             theTrack.Save();
